@@ -42,7 +42,7 @@ pairlist find_unique_eval_pairs(int evaluator, int *input, int input_size) {
         for (int y = 0; y <= input_size; y++) 
         {
             /* Since c makes use of short circuit evaluation, the is_distinct function won't be called if input[x] + input[y] != evaluator. */
-            if (input[x] + input[y] == evaluator && is_distinct(input[x], pairs_index, pairs) == TRUE)
+            if (input[x] + input[y] == evaluator && is_distinct(input[x], pairs_index, pairs) == true)
             {
                 *(pairs + pairs_index) = input[x];
                 *(pairs + pairs_index + 1) = input[y];
@@ -63,12 +63,10 @@ pairlist find_unique_eval_pairs(int evaluator, int *input, int input_size) {
 
 int main() {
     int input[] = {5, 10, 7, 12, 5, 9, 3, 7, 1, 16, 99, 20, 14};
-    int *input_ptr = input;
-
     const int input_size = (int) sizeof(input) / sizeof(int);
     const int eval = 17;
 
-    pairlist pairs = find_unique_eval_pairs(eval, input_ptr, input_size);
+    pairlist pairs = find_unique_eval_pairs(eval, input, input_size);
 
     for (int x = 0; x < pairs.length; x+=2) {
         printf("%d and %d\n", *(pairs.data + x), *(pairs.data + x + 1));
