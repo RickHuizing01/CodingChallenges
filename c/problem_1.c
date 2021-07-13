@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#define TRUE  (1==1)
-#define FALSE (!TRUE)
+#include <stdbool.h>
 
 typedef struct pairlist {
     int *data; /* pointer to list with pairs */
@@ -10,10 +8,10 @@ typedef struct pairlist {
 } pairlist;
 
 
-int is_distinct(int first, int input_length, int *input) {
+bool is_distinct(int first, int input_length, int *input) {
     if (input_length == 0) {
         /* there are no pairs yet, so validation is not required. */
-        return TRUE;
+        return true;
     }
 
     for (int x = 0; x < input_length; x+=2) {
@@ -21,11 +19,11 @@ int is_distinct(int first, int input_length, int *input) {
         we only need to check if first is present in one of the already existing pairs. */
         if (first == *(input + x) || first == *(input + x + 1)) {
             /* found double or inversed pair */
-            return FALSE;
+            return false;
         }
     }
     /* no double or inversed pairs found */
-    return TRUE;
+    return true;
 }
 
 pairlist find_unique_eval_pairs(int evaluator, int *input, int input_size) {
