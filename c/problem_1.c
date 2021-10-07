@@ -52,7 +52,7 @@ pairlist find_unique_eval_pairs(int evaluator, int *input, int input_size) {
     }
 
     /* free allocated memory that is not used anymore. */
-    if (pairs_index < (input_size * input_size * 2)) {
+    if (pairs_index < input_size * input_size * 2) {
         pairs = realloc(pairs, sizeof(int) * pairs_index);
     }
 
