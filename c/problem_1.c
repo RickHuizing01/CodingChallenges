@@ -17,7 +17,7 @@ bool is_distinct(int first, int input_length, int *input) {
     for (int x = 0; x < input_length; x+=2) {
         /* since we already know that all elements in a pair add up to 17, 
         we only need to check if first is present in one of the already existing pairs. */
-        if (first == *(input + x) || first == *(input + x + 1)) {
+        if (first == input[x] || first == input[x + 1]) {
             /* found double or inversed pair */
             return false;
         }
@@ -44,8 +44,8 @@ pairlist find_unique_eval_pairs(int evaluator, int *input, int input_size) {
             /* Since c makes use of short circuit evaluation, the is_distinct function won't be called if input[x] + input[y] != evaluator. */
             if (input[x] + input[y] == evaluator && is_distinct(input[x], pairs_index, pairs) == true)
             {
-                *(pairs + pairs_index) = input[x];
-                *(pairs + pairs_index + 1) = input[y];
+                pairs[pairs_index] = input[x];
+                pairs[pairs_index + 1] = input[y];
                 pairs_index+=2;
             } 
         }
@@ -69,6 +69,6 @@ int main() {
     pairlist pairs = find_unique_eval_pairs(eval, input, input_size);
 
     for (int x = 0; x < pairs.length; x+=2) {
-        printf("%d and %d\n", *(pairs.data + x), *(pairs.data + x + 1));
+        printf("%d and %d\n", pairs.data[x], pairs.data[x + 1]);
     }
 }
