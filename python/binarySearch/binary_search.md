@@ -1,0 +1,1 @@
+Given a sorted array input of n elements, write a binary search function to search a given number x in l and return its index.
