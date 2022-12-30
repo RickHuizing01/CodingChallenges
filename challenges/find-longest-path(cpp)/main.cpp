@@ -33,9 +33,9 @@ struct Path {
     int weight; 
 };
 
-Path getHeaviestPath(Node* tree) {
+Path getHeaviestPath(Node tree) {
     std::map<std::string, int> paths = {};
-    dfs(*tree, 0, {}, &paths);
+    dfs(tree, 0, {}, &paths);
 
     Path heaviest = {
         paths.begin()->first, 
@@ -56,7 +56,7 @@ Path getHeaviestPath(Node* tree) {
 
 int main() {
     Node* tree = buildTree();
-    Path heviestPath = getHeaviestPath(tree);
+    Path heviestPath = getHeaviestPath(*tree);
     std::cout << heviestPath.depth << ": " << heviestPath.weight << std::endl;
 
     return 0;
