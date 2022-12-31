@@ -16,7 +16,7 @@ std::string join(std::vector<std::string> vec, std::string separator) {
 
 void dfs(Node node, int currentWeight, std::vector<std::string> visited, std::map<std::string, int>& paths) {
     visited.push_back(node.name);
-    int weight = currentWeight + node.weight;
+    auto weight = currentWeight + node.weight;
     paths[join(visited, "-")] = weight;
 
     if (node.children.size() == 0) {
@@ -55,8 +55,8 @@ Path getHeaviestPath(Node tree) {
 }
 
 int main() {
-    Node* tree = buildTree();
-    Path heviestPath = getHeaviestPath(*tree);
+    auto tree = buildTree();
+    auto heviestPath = getHeaviestPath(*tree);
     std::cout << heviestPath.depth << ": " << heviestPath.weight << std::endl;
 
     return 0;
