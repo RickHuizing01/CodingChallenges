@@ -56,10 +56,7 @@ Path get_heaviest_path(const Node tree) {
 
 int main() {
     std::shared_ptr<const Node> tree = buid_tree();
-
-    if (!tree) {
-        return 1;
-    } 
+    if (tree == nullptr) return 1;
 
     Path heviestPath = get_heaviest_path(*tree);
     std::cout << heviestPath.depth << ": " << heviestPath.weight << std::endl;
