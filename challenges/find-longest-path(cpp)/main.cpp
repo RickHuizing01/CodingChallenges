@@ -14,10 +14,10 @@ std::string join(std::vector<std::string> vec, std::string separator) {
     return res;
 }
 
-void dfs(Node node, int currentWeight, std::vector<std::string> visited, std::map<std::string, int>* paths) {
+void dfs(Node node, int currentWeight, std::vector<std::string> visited, std::map<std::string, int>& paths) {
     visited.push_back(node.name);
     int weight = currentWeight + node.weight;
-    (*paths)[join(visited, "-")] = weight;
+    paths[join(visited, "-")] = weight;
 
     if (node.children.size() == 0) {
         return;
@@ -35,7 +35,7 @@ struct Path {
 
 Path getHeaviestPath(Node tree) {
     std::map<std::string, int> paths = {};
-    dfs(tree, 0, {}, &paths);
+    dfs(tree, 0, {}, paths);
 
     Path heaviest = {
         paths.begin()->first, 
