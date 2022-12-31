@@ -2,7 +2,7 @@
 #include "tree.cpp"
 #include <map>
 
-std::string join(std::vector<std::string> vec, std::string separator) {
+std::string join(const std::vector<std::string> vec, const std::string separator) {
     std::string res = "";
     for (int x = 0; x < vec.size(); x++) {
         res += vec[x];
@@ -14,17 +14,17 @@ std::string join(std::vector<std::string> vec, std::string separator) {
     return res;
 }
 
-void dfs(Node node, int currentWeight, std::vector<std::string> visited, std::map<std::string, int>& paths) {
+void dfs(const Node node, int current_weight, std::vector<std::string> visited, std::map<std::string, int>& paths) {
     visited.push_back(node.name);
-    auto weight = currentWeight + node.weight;
+    int weight = current_weight + node.weight;
     paths[join(visited, "-")] = weight;
 
     if (node.children.size() == 0) {
         return;
     }
 
-    for (int x = 0; x < node.children.size(); x++) {
-        dfs(*node.children[x], weight, visited, paths);
+    for (auto child_node : node.children) {
+        dfs(*child_node, weight, visited, paths);
     }
 }
 
@@ -33,7 +33,7 @@ struct Path {
     int weight; 
 };
 
-Path getHeaviestPath(Node tree) {
+Path get_heaviest_path(const Node tree) {
     std::map<std::string, int> paths = {};
     dfs(tree, 0, {}, paths);
 
@@ -55,8 +55,13 @@ Path getHeaviestPath(Node tree) {
 }
 
 int main() {
-    auto tree = buildTree();
-    auto heviestPath = getHeaviestPath(*tree);
+    std::shared_ptr<const Node> tree = buid_tree();
+
+    if (!tree) {
+        return 1;
+    } 
+
+    Path heviestPath = get_heaviest_path(*tree);
     std::cout << heviestPath.depth << ": " << heviestPath.weight << std::endl;
 
     return 0;
